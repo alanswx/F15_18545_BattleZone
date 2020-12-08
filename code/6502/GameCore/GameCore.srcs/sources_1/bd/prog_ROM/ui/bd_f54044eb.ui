@@ -1,14 +1,19 @@
 {
-   guistr: "# # String gsaved with Nlview 6.4.12  2014-12-16 bk=1.3272 VDI=35 GEI=35 GUI=JA:1.8
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.5",
+   "Default View_TopLeft":"-377,-269",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
-preplace port Clock -pg 1 -y 100 -defaultsOSRD
-preplace portBus Address -pg 1 -y 20 -defaultsOSRD
-preplace portBus Data -pg 1 -y 190 -defaultsOSRD
-preplace inst blk_mem_gen_0 -pg 1 -lvl 1 -y 110 -defaultsOSRD
-preplace netloc Address_1 1 0 1 150
-preplace netloc blk_mem_gen_0_douta 1 0 2 150 200 NJ
-preplace netloc Clock_1 1 0 1 150
+preplace port Clock -pg 1 -lvl 0 -x 130 -y 100 -defaultsOSRD
+preplace portBus Data -pg 1 -lvl 2 -x 390 -y 190 -defaultsOSRD
+preplace portBus Address -pg 1 -lvl 0 -x 130 -y 20 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 1 -x 260 -y 110 -defaultsOSRD
+preplace netloc Clock_1 1 0 1 150 100n
+preplace netloc blk_mem_gen_0_douta 1 0 2 160 200 360J
+preplace netloc Address_1 1 0 1 160 20n
 levelinfo -pg 1 130 260 390
-",
+pagesize -pg 1 -db -bbox -sgen -10 0 500 210
+"
 }
 0

@@ -1,8 +1,8 @@
-//Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+//Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Fri Dec  4 16:31:14 2015
-//Host        : crystal.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+//Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+//Date        : Tue Dec  8 08:48:31 2020
+//Host        : DESKTOP-BAT3C69 running 64-bit major release  (build 9200)
 //Command     : generate_target vector_ram_diffPorts_wrapper.bd
 //Design      : vector_ram_diffPorts_wrapper
 //Purpose     : IP block netlist

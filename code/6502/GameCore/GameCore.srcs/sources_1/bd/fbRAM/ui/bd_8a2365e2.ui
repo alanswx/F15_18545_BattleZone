@@ -1,19 +1,25 @@
 {
-   guistr: "# # String gsaved with Nlview 6.4.12  2014-12-16 bk=1.3272 VDI=35 GEI=35 GUI=JA:1.8
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.5",
+   "Default View_TopLeft":"-339,-215",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
-preplace port write_en -pg 1 -y 190 -defaultsOSRD
-preplace port en -pg 1 -y 170 -defaultsOSRD
-preplace port clk -pg 1 -y 110 -defaultsOSRD
-preplace portBus color_in -pg 1 -y 130 -defaultsOSRD
-preplace portBus color_out -pg 1 -y 20 -defaultsOSRD
-preplace portBus addr_a -pg 1 -y 90 -defaultsOSRD
-preplace inst blk_mem_gen_0 -pg 1 -lvl 1 -y 200 -defaultsOSRD
-preplace netloc en_1 1 0 1 160
-preplace netloc write_en_1 1 0 1 150
-preplace netloc clk_1 1 0 1 180
-preplace netloc blk_mem_gen_0_douta 1 0 2 180 310 NJ
-preplace netloc color_in_1 1 0 1 170
-preplace netloc addr_a_1 1 0 1 190
+preplace port clk -pg 1 -lvl 0 -x 130 -y 100 -defaultsOSRD
+preplace port en -pg 1 -lvl 0 -x 130 -y 160 -defaultsOSRD
+preplace port write_en -pg 1 -lvl 0 -x 130 -y 190 -defaultsOSRD
+preplace portBus addr_a -pg 1 -lvl 0 -x 130 -y 70 -defaultsOSRD
+preplace portBus color_in -pg 1 -lvl 0 -x 130 -y 130 -defaultsOSRD
+preplace portBus color_out -pg 1 -lvl 2 -x 430 -y 20 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 1 -x 300 -y 200 -defaultsOSRD
+preplace netloc addr_a_1 1 0 1 190 70n
+preplace netloc clk_1 1 0 1 180 100n
+preplace netloc color_in_1 1 0 1 170 130n
+preplace netloc blk_mem_gen_0_douta 1 0 2 200 20 NJ
+preplace netloc en_1 1 0 1 160 160n
+preplace netloc write_en_1 1 0 1 150 190n
 levelinfo -pg 1 130 300 430
-",
+pagesize -pg 1 -db -bbox -sgen 0 0 570 320
+"
 }
+0

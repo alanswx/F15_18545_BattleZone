@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2020 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -47,8 +47,8 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: xilinx.com:ip:blk_mem_gen:8.2
-// IP Revision: 6
+// IP VLNV: xilinx.com:ip:blk_mem_gen:8.4
+// IP Revision: 4
 
 `timescale 1ns/1ps
 
@@ -69,16 +69,18 @@ input wire clka;
 input wire [0 : 0] wea;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR" *)
 input wire [12 : 0] addra;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME BRAM_PORTA, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_WRITE_MODE WRITE_ONLY, READ_LATENCY 1" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 BRAM_PORTA DIN" *)
 input wire [7 : 0] dina;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 BRAM_PORTB CLK" *)
 input wire clkb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 BRAM_PORTB ADDR" *)
 input wire [11 : 0] addrb;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME BRAM_PORTB, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_WRITE_MODE READ_ONLY, READ_LATENCY 1" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 BRAM_PORTB DOUT" *)
 output wire [15 : 0] doutb;
 
-  blk_mem_gen_v8_2 #(
+  blk_mem_gen_v8_4_4 #(
     .C_FAMILY("artix7"),
     .C_XDEVICEFAMILY("artix7"),
     .C_ELABORATION_DIR("./"),
@@ -137,6 +139,8 @@ output wire [15 : 0] doutb;
     .C_USE_SOFTECC(0),
     .C_USE_ECC(0),
     .C_EN_ECC_PIPE(0),
+    .C_READ_LATENCY_A(1),
+    .C_READ_LATENCY_B(1),
     .C_HAS_INJECTERR(0),
     .C_SIM_COLLISION_CHECK("ALL"),
     .C_COMMON_CLK(0),
@@ -147,6 +151,7 @@ output wire [15 : 0] doutb;
     .C_EN_RDADDRB_CHG(0),
     .C_EN_DEEPSLEEP_PIN(0),
     .C_EN_SHUTDOWN_PIN(0),
+    .C_EN_SAFETY_CKT(0),
     .C_DISABLE_WARN_BHV_RANGE(0),
     .C_COUNT_36K_BRAM("2"),
     .C_COUNT_18K_BRAM("0"),
@@ -177,6 +182,8 @@ output wire [15 : 0] doutb;
     .sleep(1'D0),
     .deepsleep(1'D0),
     .shutdown(1'D0),
+    .rsta_busy(),
+    .rstb_busy(),
     .s_aclk(1'H0),
     .s_aresetn(1'D0),
     .s_axi_awid(4'B0),
