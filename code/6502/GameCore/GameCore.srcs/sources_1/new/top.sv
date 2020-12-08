@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `include "coreInterface.vh"
 
-module top(   input logic clk, btnCpuReset,
+module top(   input logic clk_i, btnCpuReset,
               input logic [15:0] sw,
               input logic [7:0] JB,
               output logic [7:0] JD,
@@ -77,6 +77,16 @@ module top(   input logic clk, btnCpuReset,
     
     assign self_test = 1'b1;
 
+
+ main_clock clocks (
+  .clk_out1(clk),
+  //.reset(rst),
+    .reset(1'b0),
+  .locked(),
+  .clk_in1(clk_i)
+ );
+
+/*
     always_ff @(posedge clk) begin
         if(rst) begin
             counter3MHz <= 'd16;
@@ -92,6 +102,23 @@ module top(   input logic clk, btnCpuReset,
     assign clk_3MHz = (counter3MHz > 'd15);
     assign clk_3KHz = (counter3KHz > 'd16383);
     assign clk_6KHz = (counter6KHz > 'd8192);
+*/
+    always_ff @(posedge clk) begin
+        if(rst) begin
+            counter3MHz <= 'd8;
+            counter3KHz <= 'd8192;
+            counter6KHz <= 'd4096;
+        end else begin
+            counter3MHz <= counter3MHz + 'd1;
+            counter3KHz <= counter3KHz + 'd1;
+            counter6KHz <= counter6KHz + 'd1;
+        end
+    end
+
+    assign clk_3MHz = (counter3MHz > 'd7);
+    assign clk_3KHz = (counter3KHz > 'd8191);
+    assign clk_6KHz = (counter6KHz > 'd4096);
+
 
     always_ff @(posedge clk) begin
         if(rst) coreReset <= 1'b1;

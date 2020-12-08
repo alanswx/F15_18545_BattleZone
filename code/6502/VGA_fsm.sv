@@ -43,6 +43,8 @@ module VGA_fsm(
     logic[9:0] row_out;
     logic[3:0] R, G, B;
     
+    assign clk_50=clk;
+    
     /*vga_counter #(10) hCounter(clk_25, clearH, enH, rst_l, hCount);
     vga_counter #(10) vCounter(clk_25, clearV, enV, rst_l, vCount);
     vga_register #(1) hReg(h_sync_val, clk_25, rst_l, 1'b1, Hsync);
@@ -140,11 +142,12 @@ module VGA_fsm(
         else clk_25 <= ~clk_25;
     end
     */
+    /* AJS 
     always_ff @(posedge clk, posedge rst) begin
          if(rst) clk_50 <= 1;
          else clk_50 <= ~clk_50;
      end
-     
+     */
          
      always_ff @(posedge clk_50, posedge rst) begin
          if(rst) clk_25 <= 1;

@@ -1,0 +1,9 @@
+{
+	"version": "1.0",
+	"modules": {
+		"vector_ram_diffPorts": {
+			"proto_instances": {
+			}
+		}
+	}
+}
