@@ -113,9 +113,9 @@ module rasterizer
    m_counter #(14) minorCounter(.Q(minCnt), .D(14'd0), .clk(clk), .clr(rst), .load(idleReady), .up(~cntNeg), .en(inc));
 
 
-   bresenhamCore rasterCore(.numerator(numerator), .denominator(denominator), .clk(clk), .rst(rst|idleReady), .en(loopEn), .inc(inc));
+   bresenhamCore rasterCore(.numerator(numerator[12:0]), .denominator(denominator[12:0]), .clk(clk), .rst(rst|idleReady), .en(loopEn), .inc(inc));
 
-   rasterFSM rasterControl(.readyIn(readyIn), .denominator(denominator), .majCnt(majCnt), .clk(clk), .rst(rst), .loopEn(loopEn), .done(done), .good(goodTime), .rastReady(rastReady), .idleReady(idleReady), .pipe1(pipe1));
+   rasterFSM rasterControl(.readyIn(readyIn), .denominator(denominator[12:0]), .majCnt(majCnt[12:0]), .clk(clk), .rst(rst), .loopEn(loopEn), .done(done), .good(goodTime), .rastReady(rastReady), .idleReady(idleReady), .pipe1(pipe1));
 
 
    m_mux2to1 #(14) leftXMux(.Y(leftX), .Sel((bZone|xZone) ? xNeg : yNeg), .I0(adjEndX), .I1(adjStartX));

@@ -57,10 +57,14 @@ module top(   input logic clk_i, btnCpuReset,
     logic [4:0] [7:0] dataToBram, dataFromBram;
     logic [4:0] [15:0] addrToBram;
     logic [4:0] weEnBram;
-
+/*
     logic [4:0] counter3MHz;
     logic [14:0] counter3KHz;
     logic [13:0] counter6KHz;
+*/
+    logic [3:0] counter3MHz;
+    logic [13:0] counter3KHz;
+    logic [12:0] counter6KHz;
 
     logic clk_3MHz, clk_3KHz, clk_6KHz;
 
@@ -150,9 +154,10 @@ module top(   input logic clk_i, btnCpuReset,
     end*/
     
     //assign vecWrite = (weEnBram[`BRAM_VECTOR] && !lastVecWrite);
-    
-    vector_ram_diffPorts_wrapper vecRam(.clock(clk), .writeAddr(addrToBram[`BRAM_VECTOR]-16'h2000), .writeData(dataToBram[`BRAM_VECTOR]), .writeEnable(weEnBram[`BRAM_VECTOR]), 
-                                        .readAddr((pc-16'h2000) >> 1'b1), .dataOut({inst[7:0], inst[15:8]}));
+    logic [15:0]vec_ram_write_addr = addrToBram[`BRAM_VECTOR]-16'h2000;
+    logic [15:0]vec_ram_read_addr = (pc-16'h2000) >> 1'b1;
+    vector_ram_diffPorts_wrapper vecRam(.clock(clk), .writeAddr(vec_ram_write_addr[12:0]), .writeData(dataToBram[`BRAM_VECTOR]), .writeEnable(weEnBram[`BRAM_VECTOR]), 
+                                        .readAddr(vec_ram_read_addr[12:0]), .dataOut({inst[7:0], inst[15:8]}));
 
     
     

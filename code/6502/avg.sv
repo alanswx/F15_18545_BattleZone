@@ -93,7 +93,7 @@ module avg_core(output logic [12:0] startX, startY, endX, endY,
 
     avg_decode idu(zWrEn, scalWrEn, center, jump, jsr, ret, 
                    useZReg, blank, decHalt, vector,  
-                   jumpAddr, pcOffset, dX, dY, decZVal, decLinScale, decBinScale, color,  
+                   jumpAddr, pcOffset, dX, dY, decZVal, decLinScale, decBinScale, color[2:0],  
                    instLength, {inst1Out, inst2Out});
 
     /***********************************/
