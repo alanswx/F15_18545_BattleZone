@@ -134,12 +134,35 @@ module top(   input logic clk_i, btnCpuReset,
     addrDecoder ad(dataIn, addrToBram, dataToBram, weEnBram, vggo, vgrst, dataOut, {1'b0, address[14:0]}, 
                     dataFromBram, WE, avg_halt, clk_3KHz, clk_3MHz, self_test, sw, JB[7:7]);  
 
-    prog_ROM_wrapper progRom(prog_rom_addr[13:0], clk_3MHz, dataFromBram[`BRAM_PROG_ROM]);
+//  AJS xilinx rom
+//    prog_ROM_wrapper progRom(prog_rom_addr[13:0], clk_3MHz, dataFromBram[`BRAM_PROG_ROM]);
 
-    prog_RAM_wrapper progRam(addrToBram[`BRAM_PROG_RAM][9:0], clk_3MHz, dataToBram[`BRAM_PROG_RAM], 
-                             dataFromBram[`BRAM_PROG_RAM], weEnBram[`BRAM_PROG_RAM]); 
+// AJS move to non xilinx rom
+   prog progRom(.clk(clk_3MHz),.addr(prog_rom_addr[13:0]),.data(dataFromBram[`BRAM_PROG_ROM]));
+   
+   /*
+   sp_ram #(.DATA(8),.ADDR(10)) 
+      progRam(
+         .clk(clk_3Mhz),
+         .addr(addrToBram[`BRAM_PROG_RAM][9:0]),
+         .din(dataToBram[`BRAM_PROG_RAM]),
+         .dout(dataFromBram[`BRAM_PROG_RAM]),
+         .wr(weEnBram[`BRAM_PROG_RAM]));
+    */
+    prog_RAM_wrapper progRam(addrToBram[`BRAM_PROG_RAM][9:0], clk_3MHz, dataToBram[`BRAM_PROG_RAM],dataFromBram[`BRAM_PROG_RAM], weEnBram[`BRAM_PROG_RAM]); 
     vram_2_wrapper vecRam2(.addr(addrToBram[`BRAM_VECTOR][12:0]), .clk(clk_3MHz), .dataIn(dataToBram[`BRAM_VECTOR]), .dataOut(dataFromBram[`BRAM_VECTOR]), .we(weEnBram[`BRAM_VECTOR]));
 
+/*
+  // AJS 
+   sp_ram #(.DATA(8),.ADDR(13)) 
+      vecRam2(
+         .clk(clk_3Mhz),
+         .addr(addrToBram[`BRAM_VECTOR][12:0]),
+         .din(dataToBram[`BRAM_VECTOR]),
+         .dout(dataFromBram[`BRAM_VECTOR]),
+         .wr(weEnBram[`BRAM_VECTOR])
+     );
+ */
    
     /*
     assign qCanWrite = avg_halt;
@@ -156,10 +179,29 @@ module top(   input logic clk_i, btnCpuReset,
     //assign vecWrite = (weEnBram[`BRAM_VECTOR] && !lastVecWrite);
     logic [15:0]vec_ram_write_addr = addrToBram[`BRAM_VECTOR]-16'h2000;
     logic [15:0]vec_ram_read_addr = (pc-16'h2000) >> 1'b1;
+    
     vector_ram_diffPorts_wrapper vecRam(.clock(clk), .writeAddr(vec_ram_write_addr[12:0]), .writeData(dataToBram[`BRAM_VECTOR]), .writeEnable(weEnBram[`BRAM_VECTOR]), 
                                         .readAddr(vec_ram_read_addr[12:0]), .dataOut({inst[7:0], inst[15:8]}));
-
-    
+   
+   
+  // AJS 
+  /*
+   dp_ram #(.DATA(8),.ADDR(13)) 
+      vecRam(
+         // read side
+         .a_clk(clk_3Mhz),
+         .a_addr(vec_ram_read_addr[12:0]),
+         .a_din(8'b0),
+         .a_dout({inst[7:0], inst[15:8]}),
+         .a_wr(1'b0),
+         // write side
+         .b_clk(clk_3Mhz),
+         .b_addr(vec_ram_write_addr[12:0]),
+         .b_din(dataToBram[`BRAM_VECTOR]),
+         .b_dout(),
+         .b_wr(weEnBram[`BRAM_VECTOR])
+         );
+  */
     
     /*
     memStoreQueue memQ(.dataOut(vecRamWrData), .addrOut(vecRamWrAddr), .dataValid(vecRamWrEn), 

@@ -17,7 +17,7 @@ preplace netloc blk_mem_gen_0_douta 1 0 2 140 210 350J
 preplace netloc dataIn_1 1 0 1 N 110
 preplace netloc address_1 1 0 1 140 50n
 levelinfo -pg 1 120 250 380
-pagesize -pg 1 -db -bbox -sgen -10 -10 510 220
+pagesize -pg 1 -db -bbox -sgen -20 -10 520 220
 "
 }
 0
